@@ -1,0 +1,2 @@
+javac -cp junit-4.10.jar:hamcrest-core-1.1.jar com/fdm/calculator/*.java
+java -cp .:junit-4.10.jar:hamcrest-core-1.1.jar org.junit.runner.JUnitCore com.fdm.calculator.CalculatorTest
