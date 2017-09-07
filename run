@@ -1,0 +1,2 @@
+javac com/fdm/calculator/Calculator.java
+java com/fdm/calculator/Calculator

@@ -201,6 +201,18 @@ public class CalculatorTest {
 		assertEquals(-0.25d, result, 0.1);
 	}
 
+	@Test
+	public void when_receiving_neg2_times_3_minus_2_exp_neg2_return_double_dot65() {
+		double result = calculator.evaluate("-2*3-2^-2");
+		assertEquals(-6.25d, result, 0.1);
+	}
+
+	@Test
+	public void when_receiving_2_times_3_add_2_exp_2_return_double_10() {
+		double result = calculator.evaluate("+2*+3+2^+2");
+		assertEquals(10d, result, 0.1);
+	}
+
 
 	/* Testing for Bracket */
 	@Test

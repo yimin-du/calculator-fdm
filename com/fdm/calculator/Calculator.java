@@ -1,14 +1,26 @@
 package com.fdm.calculator;
 
+import java.util.Scanner;
+
 public class Calculator {
 	
 	public static void main(String[] args) {
 
-		
+		while(true) {
+			System.out.println("Enter an expression to evaluate or 'x' to exit: ");
+			Scanner scanner = new Scanner(System.in);
+			String exp = scanner.nextLine();
+			if(exp.equals("x"))
+				break;
+			System.out.println("Result: " + evaluate(exp));
+		}		
 	}
 
-	public double evaluate(String exp) {
+	public static double evaluate(String exp) {
 		exp = exp.replaceAll("\\s+","");
+		if(exp.charAt(0) == '+') {
+			exp = exp.substring(1);
+		}
 		//System.out.println("exp:" + exp);
 		if(exp.contains("(")) {
 			int i = exp.lastIndexOf("(");
@@ -43,15 +55,15 @@ public class Calculator {
 		} 
 	}
 
-	private String left(String exp, int i) {
+	private static String left(String exp, int i) {
 		return exp.substring(0, i);
 	}
 
-	private String right(String exp, int i) {
+	private static String right(String exp, int i) {
 		return exp.substring(i + 1);
 	}
 
-	private double power(double a, int b) {
+	private static double power(double a, int b) {
 		if(b == 0)
 			return 1;
 		if(b > 0)
@@ -61,24 +73,24 @@ public class Calculator {
 		}
 	}
 
-	private int nextMinusSign(String exp) {
+	private static int nextMinusSign(String exp) {
 		int index = exp.lastIndexOf("-");
 		if( index <= 0)
 			return -1;
 		else
 			if(!Character.isDigit(exp.charAt(index-1)))
-				return -1;
+				return nextMinusSign(exp.substring(0, index));
 			else 
 				return index;
 	}
 
-	private int nextAddSign(String exp) {
-		int index = exp.indexOf("+");
+	private static int nextAddSign(String exp) {
+		int index = exp.lastIndexOf("+");
 		if( index <= 0)
 			return -1;
 		else
 			if(!Character.isDigit(exp.charAt(index-1)))
-				return -1;
+				return nextAddSign(exp.substring(0, index));
 			else 
 				return index;
 	}
