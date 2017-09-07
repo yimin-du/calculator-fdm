@@ -19,6 +19,12 @@ public class CalculatorTest {
 		double result = calculator.evaluate("1");
 		assertEquals(1d, result, 0.1);
 	}
+
+	@Test
+	public void when_receiving_string_positive_1_should_return_double_1() {
+		double result = calculator.evaluate("+1");
+		assertEquals(1d, result, 0.1);
+	}
 	
 	@Test
 	public void when_receiving_string_neg_1_should_return_double_neg_1() {
@@ -44,13 +50,13 @@ public class CalculatorTest {
 		assertEquals(89d, result, 0.1);
 	}
 	
-	
+
 	 /* Testing for simple addition and subtraction */
 
 	@Test
 	public void when_receiving_1_plus_1_return_double_2() {
-		double result = calculator.evaluate("1+1");
-		assertEquals(2d, result, 0.1);
+		double result = calculator.evaluate("1+1+1");
+		assertEquals(3d, result, 0.1);
 	}
 
 	@Test
@@ -193,6 +199,52 @@ public class CalculatorTest {
 	public void when_receiving_neg2_exp_neg2_return_double_dot25() {
 		double result = calculator.evaluate("-2^-2");
 		assertEquals(-0.25d, result, 0.1);
+	}
+
+
+	/* Testing for Bracket */
+	@Test
+	public void when_receiving_neg2_times_3add1_return_double_neg8() {
+		double result = calculator.evaluate("-2*(3+1)");
+		assertEquals(-8d, result, 0.1);
+	}
+
+	@Test
+	public void when_receiving_br_neg3_br_return_double_neg3() {
+		double result = calculator.evaluate("(-3)");
+		assertEquals(-3d, result, 0.1);
+	}
+
+	@Test
+	public void when_receiving_brbrbr3brbrbr_return_double_3() {
+		double result = calculator.evaluate("(((3)))");
+		assertEquals(3d, result, 0.1);
+	}
+
+	@Test
+	public void BPASMD_Expression_Bracket_Middle() {
+		double result = calculator.evaluate("5+2*(3-1)+7*8");
+		assertEquals(65d, result, 0.1);
+	}
+
+	@Test
+	public void BPASMD_Expression_nested_Bracket() {
+		double result = calculator.evaluate("(2)+(5*(4-2))*(-1-1)-8/2");
+		assertEquals(-22d, result, 0.1);
+	}
+
+	@Test
+	public void BPASMD_Expression_nested_Bracket2() {
+		double result = calculator.evaluate("(2^-2)+(5*(4-2)^2)*(-1-1)-8/2");
+		assertEquals(-43.75d, result, 0.1);
+	}
+
+
+	/* Normalise the expression input */
+	@Test
+	public void remove_spaces() {
+		double result = calculator.evaluate(" 5  +2*(3 -1)+7*   8");
+		assertEquals(65d, result, 0.1);
 	}
 	
 }
